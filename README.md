@@ -113,8 +113,9 @@
 
 ---
 
-### 🔹 결함
-- 비밀번호 숫자로 8자리로 구성할 경우 가입할 수 있다.
+![image.png](images/image8.JPG)
+
+![image.png](images/image9.JPG)
 
 ---
 
