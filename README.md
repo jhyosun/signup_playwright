@@ -196,14 +196,8 @@ def test_signup(page, case):
 ---
 
 
-| | |
 |---|---|
 | ![](images/image8.JPG) | ![](images/image9.JPG) |
-
-
-![image.png](images/image8.JPG)
-
-![image.png](images/image9.JPG)
 
 ---
 
