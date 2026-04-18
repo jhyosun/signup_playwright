@@ -1,5 +1,5 @@
 # Playwright 활용 회원가입 테스트
-![image.png](images/image1.png)
+![image.png](images/image1.JPG)
 
 ### 🔹 개요
 
@@ -55,4 +55,4 @@ Page Object Model(POM) 구조와 데이터 기반 테스트 방식을 적용하�
 1. 설계 방식
 
 테스트는 Page Object Model(POM) 구조를 기반으로 설계하였다.
-![image.png](images/image.png)
+![image.png](images/image.JPG)
