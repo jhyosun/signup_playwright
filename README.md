@@ -86,7 +86,7 @@
 
 👉 회원가입 페이지를 하나의 클래스로 구성하여 메서드를 정의하였다.
 
-<hr style="border: 0; border-top: 0.5px solid #ccc;">
+<hr style="border: 0; border-top: 0.2px solid #ccc;">
 
 #### 🔎 공통 실행 환경 구성
 
@@ -94,6 +94,6 @@
 
 👉`conftest.py`에서 Pytest fixture를 사용해 Playwright 환경 구성하였다.
 
-<hr style="border: 0; border-top: 0.5px solid #ccc;">
+<hr style="border: 0; border-top: 0.2px solid #ccc;">
 
 #### 📝 테스트 코드 작성
