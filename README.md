@@ -1,4 +1,5 @@
 # Playwright 활용 회원가입 테스트
+![image.png](images/image1.png)
 
 ### 🔹 개요
 
