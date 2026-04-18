@@ -99,6 +99,88 @@
 ---
 
 #### 📝 테스트 코드 작성
+import pytest
+from pages.signup_playwright import SignUpPage
+from playwright.sync_api import expect
+
+SIGNUP_CASES = [
+    # 정상적인 회원가입
+    {"id":"success", 
+     "email":"user1@email.com",
+     "username":"홍길동",
+     "password":"asdf1234",
+     "pw_confirm":"asdf1234",
+     "terms":True, 
+     "expect":"가입이 완료되었습니다!"},
+
+    # 이메일 형식 오류
+    {"id":"invalid_email", 
+     "email":"user2!email.com",
+     "username":"이영희",
+     "password":"zxcv5678",
+     "pw_confirm":"zxcv5678",
+     "terms":True, 
+     "expect":"입력값을 다시 확인해주세요."},
+
+    # 비밀번호 조건 미충족 (길이 짧음)
+    {"id":"invalid_password", 
+     "email":"user3@email.com",
+     "username":"김철수",
+     "password":"zxcv567",
+     "pw_confirm":"zxcv567",
+     "terms":True, 
+     "expect":"입력값을 다시 확인해주세요."},
+
+    # 비밀번호 조건 미충족 (영어로만)
+    {"id":"invalid_password", 
+     "email":"user4@email.com",
+     "username":"이수지",
+     "password":"qwerasdf",
+     "pw_confirm":"qwerasdf",
+     "terms":True, 
+     "expect":"입력값을 다시 확인해주세요."},
+
+    # 비밀번호 불일치
+    {"id":"invalid_password", 
+     "email":"user5@email.com",
+     "username":"문동주",
+     "password":"zxcv1234",
+     "pw_confirm":"asdf1234",
+     "terms":True, 
+     "expect":"입력값을 다시 확인해주세요."},
+
+    # 필수 값 누락
+    {"id":"invalid_pw_confirm", 
+     "email":"user6@email.com",
+     "username":"최지수",
+     "password":"zxcv1234",
+     "pw_confirm":" ",
+     "terms":True, 
+     "expect":"입력값을 다시 확인해주세요."},
+
+    # 체크박스 해제
+    {"id":"invalid_term", 
+     "email":"user7@email.com",
+     "username":"김종수",
+     "password":"1234asdf",
+     "pw_confirm":"1234asdf",
+     "terms":False, 
+     "expect":"입력값을 다시 확인해주세요."}
+]
+
+@pytest.mark.parametrize("case", SIGNUP_CASES, ids=[c["id"] for c in SIGNUP_CASES])
+# [] 반복문을 돌면서 하나씩 빼오는 것. FC for i in case 는 변수 이름. 위에 리스트 안에서 첫번째 케이스를 가져오면 변수에 들어가서 id를 가져옴.
+# [success, fail] 이렇게 리스트를 만들어줌
+# 한눈에 파악하기 쉽다.
+
+def test_signup(page, case):
+    signup_page = SignUpPage(page)
+
+    signup_page.open()
+    signup_page.signup(
+        case["email"], case["username"], case["password"], case["pw_confirm"], case["terms"]        
+    )
+    expect(signup_page.flash).to_contain_text(case["expect"])
 
 
 
