@@ -188,19 +188,15 @@ def test_signup(page, case):
 ```
 
 
-
-![image.png](images/image5.JPG)
-
-![image.png](images/image5-2.JPG)
-
-![image.png](images/image6.JPG)
-
 ![image.png](images/image7.JPG)
 
 👉 정상적인 회원가입, 비정상적인 회원가입을 진행하였다. `parameterize`를 사용하여 테스트케이스를 구성하여 하나의 테스트 구조로 처리할 수 있게 구현했다.
 
 
 ---
+
+<img src="images/image8.JPG" width="49%">
+<img src="images/image9.JPG" width="49%">
 
 ![image.png](images/image8.JPG)
 
