@@ -113,7 +113,7 @@ SIGNUP_CASES = [
      "password":"asdf1234",
      "pw_confirm":"asdf1234",
      "terms":True, 
-     "expect":"가입이 완료되었습니다!"},
+     "expect_flash":"가입이 완료되었습니다!"},
 
     # 이메일 형식 오류
     {"id":"invalid_email", 
@@ -122,7 +122,8 @@ SIGNUP_CASES = [
      "password":"zxcv5678",
      "pw_confirm":"zxcv5678",
      "terms":True, 
-     "expect":"입력값을 다시 확인해주세요."},
+     "expect_errors":{"email":"이메일 형식이 올바르지 않습니다."},
+     "expect_flash":"입력값을 다시 확인해주세요."},
 
     # 비밀번호 조건 미충족 (길이 짧음)
     {"id":"invalid_password", 
@@ -131,7 +132,8 @@ SIGNUP_CASES = [
      "password":"zxcv567",
      "pw_confirm":"zxcv567",
      "terms":True, 
-     "expect":"입력값을 다시 확인해주세요."},
+     "expect_errors":{"password":"비밀번호는 8자 이상, 숫자를 포함해야 합니다."},
+     "expect_flash":"입력값을 다시 확인해주세요."},
 
     # 비밀번호 조건 미충족 (영어로만)
     {"id":"invalid_password", 
@@ -140,7 +142,8 @@ SIGNUP_CASES = [
      "password":"qwerasdf",
      "pw_confirm":"qwerasdf",
      "terms":True, 
-     "expect":"입력값을 다시 확인해주세요."},
+     "expect_errors":{"password":"비밀번호는 8자 이상, 숫자를 포함해야 합니다."},
+     "expect_flash":"입력값을 다시 확인해주세요."},
 
     # 비밀번호 불일치
     {"id":"invalid_password", 
@@ -149,16 +152,18 @@ SIGNUP_CASES = [
      "password":"zxcv1234",
      "pw_confirm":"asdf1234",
      "terms":True, 
-     "expect":"입력값을 다시 확인해주세요."},
+     "expect_errors":{"confirm":"비밀번호가 일치하지 않습니다."},
+     "expect_flash":"입력값을 다시 확인해주세요."},
 
     # 필수 값 누락
     {"id":"invalid_pw_confirm", 
      "email":"user6@email.com",
      "username":"최지수",
      "password":"zxcv1234",
-     "pw_confirm":" ",
+     "pw_confirm":"",
      "terms":True, 
-     "expect":"입력값을 다시 확인해주세요."},
+     "expect_errors":{"confirm":"비밀번호 확인을 입력하세요."},
+     "expect_flash":"입력값을 다시 확인해주세요."},
 
     # 이용약관 미동의
     {"id":"invalid_term", 
@@ -167,7 +172,8 @@ SIGNUP_CASES = [
      "password":"1234asdf",
      "pw_confirm":"1234asdf",
      "terms":False, 
-     "expect":"입력값을 다시 확인해주세요."}
+     "expect_errors":{"terms":"이용약관에 동의해야 합니다."},
+     "expect_flash":"입력값을 다시 확인해주세요."}
 ]
 
 @pytest.mark.parametrize("case", SIGNUP_CASES, ids=[c["id"] for c in SIGNUP_CASES])
@@ -183,8 +189,22 @@ def test_signup(page, case):
     signup_page.signup(
         case["email"], case["username"], case["password"], case["pw_confirm"], case["terms"]        
     )
-    expect(signup_page.flash).to_contain_text(case["expect"])
 
+    # 필드별 에러 메시지 검증
+    error_msg = {
+        "email" : signup_page.error_email,
+        "username" : signup_page.error_username,
+        "password" : signup_page.error_password,
+        "confirm" : signup_page.error_confirm,
+        "terms" : signup_page.error_terms,
+    }
+    for field, message in case.get("expect_errors", {}).items(): # success일 경우 넘어감.
+        expect(error_msg[field]).to_contain_text(message)
+ 
+    signup_page.print_errors()
+    
+    # flash 검증
+    expect(signup_page.flash).to_contain_text(case["expect_flash"])
 ```
 
 
