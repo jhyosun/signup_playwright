@@ -100,7 +100,7 @@
 
 #### 📝 테스트 코드 작성
 
-![image.png](images/image5.JPG)
+
 
 ![image.png](images/image5-2.JPG)
 
