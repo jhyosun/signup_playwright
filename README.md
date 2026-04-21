@@ -223,16 +223,20 @@ def test_signup(page, case):
 
 ---
 
-### 🔹 결함 리포트
-
-![image.png](images/bugreport_signup.JPG)
-
----
-
 | | |
 |---|---|
 | ![](images/image8.JPG) | ![](images/image9.JPG) |
 
+
+---
+
+### 🔹 결함 리포트
+
+![image.png](images/bugreport_signup.JPG)
+
+| | |
+|---|---|
+| ![](images/bug_001.JPG) | ![](images/bug_002.JPG) |
 
 ---
 
