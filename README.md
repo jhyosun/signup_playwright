@@ -234,7 +234,7 @@ def test_signup(page, case):
 
 ![image.png](images/bugreport_signup.JPG)
 
-| | |
+| BUG_001 | BUG_002 |
 |---|---|
 | ![](images/bug_001.JPG) | ![](images/bug_002.JPG) |
 
