@@ -81,7 +81,7 @@
 
 ### 🔹 테스트 케이스
 
-![image.png](images/testcase_signup.JPG)
+![image.png](images/testcase_signup2.JPG)
 
      
 ---
